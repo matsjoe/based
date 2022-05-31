@@ -1,7 +1,7 @@
 import urlLoader from './urlLoader'
 import { Connection } from './types'
 import { BasedClient } from '../'
-import WebSocket from 'isomorphic-ws'
+import * as WebSocket from 'isomorphic-ws'
 
 type ActiveFn = (isActive: boolean) => void
 

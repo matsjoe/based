@@ -2,17 +2,47 @@
   "name": "@based/client",
   "version": "2.7.5",
   "license": "MIT",
-  "main": "dist/index.js",
   "browser": {
     "./dist/file/stream/index.js": "./dist/file/stream/browser.js"
   },
+  "type": "module",
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "mainFields": [
+    "browser",
+    "module",
+    "main"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
   "scripts": {
-    "buildBundle": "node ./build/index.js",
-    "build": "npx tsc && npm run buildBundle",
-    "watch": "concurrently \"tsc --watch\" \"npm run buildBundle -- --watch\"",
+    "build": "microbundle",
+    "watch": "microbundle watch",
+    "clean": "rimraf {.turbo,dist,node_modules}",
     "test": "ava --timeout 1m --verbose",
-    "watchTest": "ava --color --watch --verbose",
-    "clean": "rimraf {.turbo,dist,node_modules}"
+    "watchTest": "ava --color --watch --verbose"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.0",
+    "@types/node": "^17.0.23",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
+    "rimraf": "^3.0.2",
+    "concurrently": "^7.1.0",
+    "esbuild": "^0.14.29",
+    "@saulx/hash": "^1.1.0",
+    "@saulx/selva": "^11.0.0",
+    "@saulx/utils": "^2.2.1",
+    "@saulx/selva-server": "11.0.0",
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/ws": "^7.4.6",
+    "ava": "4.2.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "sideEffects": false,
   "ava": {
@@ -24,7 +54,7 @@
       "ts"
     ],
     "require": [
-      "ts-node/register"
+      "esm"
     ]
   },
   "dependencies": {
@@ -37,21 +67,5 @@
     "cross-fetch": "^3.1.4",
     "isomorphic-ws": "^4.0.1",
     "ws": "^7.5.3"
-  },
-  "devDependencies": {
-    "concurrently": "^7.1.0",
-    "esbuild": "^0.14.29",
-    "@saulx/hash": "^1.1.0",
-    "@saulx/selva": "^11.0.0",
-    "@saulx/utils": "^2.2.1",
-    "@saulx/selva-server": "11.0.0",
-    "@types/jsonwebtoken": "^8.5.6",
-    "@types/node": "^17.0.23",
-    "@types/ws": "^7.4.6",
-    "ava": "3.15.0",
-    "jsonwebtoken": "^8.5.1",
-    "ts-node": "^10.1.0",
-    "typescript": "^4.3.5",
-    "rimraf": "^3.0.2"
   }
 }

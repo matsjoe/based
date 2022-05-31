@@ -3,7 +3,7 @@ import { Readable } from 'stream'
 import { request } from 'http'
 import { request as sslRequest } from 'https'
 import { Based, FileUploadPath } from '../..'
-import fs from 'fs'
+import * as fs from 'fs'
 import { promisify } from 'util'
 
 const stat = promisify(fs.stat)

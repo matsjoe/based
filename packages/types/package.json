@@ -2,30 +2,27 @@
   "name": "@based/types",
   "version": "2.6.0",
   "license": "MIT",
-  "main": "dist/index.js",
+  "type": "module",
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
   "scripts": {
-    "build": "npx tsc",
-    "watch": "npm run build -- --watch",
+    "build": "microbundle",
+    "watch": "microbundle watch",
     "clean": "rimraf {.turbo,dist,node_modules}"
   },
-  "sideEffects": false,
-  "ava": {
-    "files": [
-      "test/*.ts"
-    ],
-    "concurrency": 1,
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
-  },
   "devDependencies": {
-    "@types/node": "^17.0.25",
-    "ava": "3.15.0",
+    "microbundle": "^0.15.0",
+    "@types/node": "^17.0.23",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "rimraf": "^3.0.2"
-  }
+  },
+  "sideEffects": false
 }

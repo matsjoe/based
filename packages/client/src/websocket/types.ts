@@ -1,4 +1,4 @@
-import WebSocket from 'isomorphic-ws'
+import * as WebSocket from 'isomorphic-ws'
 
 export class Connection {
   public ws?: WebSocket
