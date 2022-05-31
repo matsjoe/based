@@ -1,12 +1,10 @@
-import anyTest, { TestInterface } from 'ava'
+import test from 'ava'
 import createServer, { AuthorizeFn } from '@based/server'
 import { start } from '@saulx/selva-server'
 import based, { BasedError, BasedErrorCodes } from '@based/client'
-import { SelvaClient } from '@saulx/selva'
 
-const test = anyTest as TestInterface<{
-  db: SelvaClient
-}>
+// --------------------------
+console.info(createServer)
 
 const authorize: AuthorizeFn = async ({ user }) => {
   if (user._token === 'expiredToken') {
@@ -23,6 +21,7 @@ test.before(async (t) => {
   const selvaServer = await start({
     port: 9401,
   })
+  // @ts-ignore
   t.context.db = selvaServer.selvaClient
   // @ts-ignore
   await t.context.db.updateSchema({
@@ -44,6 +43,7 @@ test.before(async (t) => {
 })
 
 test.after(async (t) => {
+  // @ts-ignore
   await t.context.db.destroy()
 })
 
@@ -152,7 +152,9 @@ test.serial('should throw with invalid refreshToken', async (t) => {
   const error = await t.throwsAsync(async () => {
     await client.get({ $id: 'root', id: true })
   })
-  t.regex(error.name, /^RenewTokenError/)
+  if (error) {
+    t.regex(error.name, /^RenewTokenError/)
+  }
   t.is(refreshTokenCallCount, 1)
 })
 
@@ -228,6 +230,7 @@ test.serial('should renew a token with subscription', async (t) => {
       t.pass()
     }
   })
+  // @ts-ignore
   await t.context.db.set({
     $id: 'thWawa',
     name: 'yeye',
@@ -308,6 +311,7 @@ test.serial.only('should renew a token with subscription2', async (t) => {
       t.pass()
     }
   })
+  // @ts-ignore
   await t.context.db.set({
     $id: 'thWawa',
     name: 'yeye',

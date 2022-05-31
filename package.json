@@ -7,6 +7,7 @@
   "bugs": {
     "url": "https://github.com/atelier-saulx/based/issues"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/atelier-saulx/based"

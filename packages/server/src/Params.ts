@@ -47,11 +47,11 @@ export class Params {
 
   public name?: string
 
-  public update?: (value: any, checksum?: number) => void
+  public update: (value: any, checksum?: number) => void
 
   public callStack: string[] // this can be re-used
 
-  public user?: Client
+  public user: Client
 
   public payload?: any
 
@@ -69,5 +69,11 @@ export class Params {
     }
   }
 }
+
+// observable params
+
+// observable user params
+
+// params
 
 Params.prototype.callStack = []

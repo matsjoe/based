@@ -34,7 +34,7 @@ export type CallFunction = {
   worker?: boolean
 }
 
-export type AuthorizeFn = (params: Params) => Promise<boolean>
+export type AuthorizeFn = (params: CallParams) => Promise<boolean>
 
 export type LoginFn = (params: Params) => Promise<GenericObject>
 export type LogoutFn = (params: Params) => Promise<GenericObject>

@@ -50,11 +50,11 @@
       "test/*.ts"
     ],
     "concurrency": 1,
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "esm"
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
+      "--loader=ts-node/esm"
     ]
   },
   "dependencies": {
